@@ -25,8 +25,9 @@ ul{
         justify-content:center;
         align-items:center;
     }
-    i{
-        font-size:.4rem;
+    img{
+        width:.6rem;
+        height:.6rem;
     }
     span{
         font-size:.3rem;

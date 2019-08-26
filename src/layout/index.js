@@ -5,7 +5,7 @@ export default class LayOut extends Component {
         return (
             <Fragment>
                     {this.props.children}
-                    {this.props.meta.flag?<TabBar/>:""}
+                    {this.props.meta.flag?<TabBar  {...this.props.meta}/>:""}
             </Fragment>
         )
         // 插槽显示子组件

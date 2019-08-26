@@ -5,38 +5,43 @@ export const tabBarRoute =[
         path:"/home",
         component:Home,
         meta:{
-            flag:true
+            flag:true,
+            bgFlag:false,
+            index:0
         },
         name:"首页",
-        icon:"\ue61a"
     },
     {
         path:"/find",
         component:Find,
         meta:{
-            flag:true
+            flag:true,
+            bgFlag:false,
+            index:1
         },
         name:"分类",
-        icon:"\ue626"
     },
     {
         path:"/order",
         component:Order,
         meta:{
-            flag:true
+            flag:true,
+            bgFlag:false,
+            index:2
+
         },
         name:"订单",
-        icon:"\ue69e"
     },
     {
         path:"/mine",
         component:Mine,
         meta:{
             flag:true,
-            auth:true
+            bgFlag:false,
+            index:3,
+            auth:false
         },
         name:"我的",
-        icon:"\ue61c"
     }
 ]
 

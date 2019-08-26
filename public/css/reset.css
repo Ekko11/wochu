@@ -10,7 +10,7 @@ address, caption, cite, code, dfn, th, var { font-style:normal; font-weight:norm
 
 ul, ol ,li{ list-style:none; }
 
-body { color:#333; font:12px "SimSun","宋体","Arial Narrow",HELVETICA; background:#fff;}
+body { color:#333; font:12px PingFangSC-Regular,Source Han Sans,Microsoft Yahei; background:#fff;}
 
 a { color:#666; text-decoration:none; }
 /*清除浮动*/
@@ -19,6 +19,7 @@ a { color:#666; text-decoration:none; }
 body,html,#root{
     height: 100%;
     overflow: hidden;
+    background: #eee;
 }
 
 
