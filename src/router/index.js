@@ -1,4 +1,4 @@
-import { Home,Find,Order,Mine,Login} from "@pages"
+import { Home,Find,Order,Mine,Login,Garden} from "@pages"
 
 export const tabBarRoute =[
     {
@@ -53,6 +53,15 @@ export const noTabBarRoute = [
             flag:false
         },
         name:"登录",
+
+    },
+    {
+        path:"/garden",
+        component:Garden,
+        meta:{
+            flag:false
+        },
+        name:"我的菜园",
 
     }
 ]

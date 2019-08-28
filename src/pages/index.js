@@ -21,11 +21,16 @@ const Login=Loadable({
     loader:()=>import("./login"),
     loading:Loading
 })
+const Garden=Loadable({
+    loader:()=>import("./garden"),
+    loading:Loading
+})
 
 export{
     Home,
     Find,
     Order,
     Mine,
-    Login
+    Login,
+    Garden
 }
