@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import { MineWrap } from "./styled"
-export default class Mine extends Component {
+import {connect } from "react-redux"
+ class Mine extends Component {
+    state={
+        flag:false
+    }
     render() {
+        let { flag } = this.state
+        let {user,isLogin} = this.props
+        console.log(isLogin,111)
         return (
             <MineWrap>
                 <div className="top">
@@ -9,7 +16,7 @@ export default class Mine extends Component {
                 </div>
                 <div className="icon">
                     <img src={require("@static/img/nologin.png")} alt="" />
-                    <p>未登录</p>
+                    <p>{user}</p>
                 </div>
                 <div className="price">
                     <div className="price_top">
@@ -96,7 +103,34 @@ export default class Mine extends Component {
                 <div className="bottom_gif">
                     <img src={require("@static/img/19.gif")} alt=""/>
                 </div>
+                <div className={isLogin?"zhezhao zhezhao1":"zhezhao"} onClick={this.props.logHandle.bind(this)}>
+                    <div className={flag?"tankuang tan1":"tankuang"}>
+                        <p> 亲，您还未登录</p>
+                        <p>请先登录</p>
+                    
+                    </div>
+                </div>
+
+
             </MineWrap>
         )
     }
 }
+
+
+const mapStateToProps=(state)=>({
+    user :state.order.user,
+    isLogin:state.order.isLogin
+})
+const mapDispatchToProps=(dispatch)=>({
+    logHandle(){
+        this.setState({
+            flag:true
+        })
+        setTimeout(()=>{
+            this.props.history.push("/login")
+        },500)
+    }
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Mine)

@@ -1,47 +1,73 @@
-import React, { Component } from 'react'
-import {order_api} from "@api/order"
-import {OrderWrap} from "./styled"
-export default class Order extends Component {
-    state={
-        list:[]
+import React, { Component,Fragment } from 'react'
+import { OrderWrap } from "./styled"
+import { connect } from "react-redux"
+import Recommed from "@components/recommend"
+import { withRouter} from "react-router-dom"
+import OrderList from "@components/orderList"
+class Login extends Component{
+  render(){
+      return(
+          <div className="loginBn">
+          <div className="empty_goods">
+              <img src={require("@static/img/ic_no_goods.png")}  alt="" />
+              <p className="p1">您的购物车为空</p>
+              <p className="p2">可以看看哪些想买的</p>
+              <div className="login_Bn" onClick={this.goShop.bind(this)}>随便逛逛</div>
+          </div>
+      </div>
+      )
+  }
+  goShop() {
+      
+    this.props.history.push("/home")
     }
+}
+let Log =  withRouter(Login)
+class NoLogin extends Component{
+    render(){
+        return (
+            <div className="nologinBn">
+            <div className="login_Bn" onClick={this.loginBn.bind(this)}>登 录</div>
+        </div>
+        )
+    }
+    loginBn() {
+        this.props.history.push("/login")
+    }
+   
+}
+let NoLog = withRouter(NoLogin)
+
+
+
+
+ class Order extends Component {
     render() {
-        let {list} = this.state
-        console.log(list)
+        let { isLogin ,shopGoods} = this.props
         return (
             <OrderWrap>
-            <div className="wrapDiv">
-                <div className="loginBn">
-                    <div>登 录</div>
-                </div>
-                <img src={require("@static/img/recommend.png")} alt=""/>
-
-                <div className="recom_list">
+                <div className="wrapDiv">
                 {
-                    list.map((item,index)=>(
-                        <div className="goods" key={index}>
-                        <img src={item.icon} alt=""/>
-                        <div className="wrap">
-                        <p className="goodDec">{item.goodsName}</p>
-                        <p className="oldPrice">￥{item.marketPrice}</p>
-                        <p className="nowPrice">￥{item.price}</p>
-                        <div className="addBn">
-                            <img src={require("@static/img/add_cart.png")} alt=""/>
-                        </div>
-                        </div>
-                    </div>
-                    ))
-                }
-                   
-                </div>
+                 !isLogin?<NoLog/>:shopGoods[0]?<OrderList list={shopGoods}/>:<Log/>
+            }  
+                    <Recommed/>
                 </div>
             </OrderWrap>
         )
     }
-    async componentDidMount(){
-        let data = await order_api()
-        this.setState({
-            list:data.data.items
-        })
-    }   
+   
+   
 }
+
+const mapStateToProps=(state)=>({
+    isLogin:state.order.isLogin,
+    shopGoods:state.order.shopGoods,
+})
+const mapDispatchToProps=(dispatch)=>({
+
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Order)
+
+
+// 
+//    

@@ -118,4 +118,36 @@ text-align: center;
         height:100%
     }
 }
+.zhezhao{
+    height:100%;
+    width:100%;
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    .tankuang{
+        display:none;
+        position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2.5rem;
+    height: 1.2rem;
+    margin: auto;
+    background: rgba(0,0,0,0.7);
+        p{
+            line-height: .4rem;
+            font-size: .3rem;
+             margin-top: 0.1rem;
+             color: #fff;
+        }
+    }
+    .tan1{
+        display:block; 
+    }
+}
+.zhezhao1{
+    display:none;
+}
 `
