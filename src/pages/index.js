@@ -21,11 +21,25 @@ const Login=Loadable({
     loader:()=>import("./login"),
     loading:Loading
 })
-
+const Classify=Loadable({
+    loader:()=>import("./classify"),
+    loading:Loading
+})
+const Search=Loadable({
+    loader:()=>import("./search"),
+    loading:Loading
+})
+const Details=Loadable({
+    loader:()=>import("./details"),
+    loading:Loading
+})
 export{
     Home,
     Find,
     Order,
     Mine,
-    Login
+    Login,
+    Classify,
+    Search,
+    Details
 }
