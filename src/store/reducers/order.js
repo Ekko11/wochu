@@ -148,5 +148,4 @@ export default  handleActions({
         return newState
     }
 
-    
 },defaultState)

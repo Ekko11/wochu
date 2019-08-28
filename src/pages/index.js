@@ -33,6 +33,11 @@ const Details=Loadable({
     loader:()=>import("./details"),
     loading:Loading
 })
+const Garden=Loadable({
+    loader:()=>import("./garden"),
+    loading:Loading
+})
+
 export{
     Home,
     Find,
@@ -41,5 +46,6 @@ export{
     Login,
     Classify,
     Search,
-    Details
+    Details,
+    Garden
 }

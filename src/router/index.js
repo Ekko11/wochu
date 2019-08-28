@@ -90,6 +90,16 @@ export const noTabBarRoute = [
         },
         name:"详情",
         icon:"\ue61c"
+
+    },
+    {
+        path:"/garden",
+        component:Garden,
+        meta:{
+            flag:false
+        },
+        name:"我的菜园",
+
     }
 ]
 
