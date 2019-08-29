@@ -29,7 +29,6 @@ import { withRouter}  from "react-router-dom"
                             </div>
                         ))
                     }
-
                 </div>
             </Fragment>
 
@@ -54,13 +53,11 @@ const mapStateToProps=(state)=>({
 
 const mapDispatchToProps=(dispatch)=>({
     addToShop(item){
-        // if(this.props.isLogin){
-        //     dispatch(addShop_order(item))
-        // }else{
-        //     this.props.history.push("/login")
-        // }
-            dispatch(addShop_order(item))
-
+            if(this.props.isLogin){
+                dispatch(addShop_order(item))
+            }else{
+                this.props.history.push("/login")
+            }
     }
 })
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Recommed))

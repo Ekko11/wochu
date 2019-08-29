@@ -21,8 +21,6 @@ import {withRouter} from "react-router-dom"
   }
     render() {
         let {rightList,flag,rightGoodsList,togIndex}=this.state
-        console.log(rightList)
-        console.log(rightList,88)
         return (
             <RightWrapper>
             <div className="right">

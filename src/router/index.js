@@ -1,4 +1,4 @@
-import { Home,Find,Order,Mine,Login,Classify,Search,Details} from "@pages"
+import { Home,Find,Order,Mine,Login,Classify,Search,Details,Garden} from "@pages"
 
 export const tabBarRoute =[
     {

@@ -65,7 +65,7 @@ img{
         .goods{
             width:2rem;
             background:#fff;
-            margin-top: 20px;
+            margin-top: 0.2rem;
             img{width:100%}
             position:relative;
             .addBn{
@@ -257,7 +257,7 @@ img{
     position:absolute;
     left:-100%;
     position: absolute;
-    left: -185px;
+    left: -1.85rem;
     top: 0;
     color: #999;
     font-size: .3rem;

@@ -45,4 +45,6 @@ export const goodsDel_Bn =  {
 export const clean_goods =  {
     type:"CLEAN_GOODS",
 }
-
+export const logOutAc =  {
+    type:"LOGOUT_AC",
+}

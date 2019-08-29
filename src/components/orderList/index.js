@@ -1,6 +1,7 @@
 import React, { Component ,Fragment} from 'react'
 import {good_time} from "@api/order"
 import { connect } from "react-redux"
+import Prompt from "@common/prompt"
 import { withRouter } from "react-router-dom"
 import {checked_change,allChecked_change,goodsNum_Add,goodsNum_Reduce,
     goodsDel_Tog,goodsDel_Bn,clean_goods} from "@store/orderAction"
@@ -8,10 +9,12 @@ class OrderList extends Component{
    state={
        date:sessionStorage.getItem("recomTime")||"",
        isDel:false,
+       bool:false,
+       allDelBool:false
    }
     render(){
         let { shopGoods,allChecked} = this.props
-        let { date,isDel } = this.state
+        let { date,isDel ,bool,allDelBool} = this.state
         let totlePrice = 0
         let goodsNum = 0
         return(
@@ -44,7 +47,7 @@ class OrderList extends Component{
                             <img className="check_img" onClick={this.props.checkedChange.bind(this,index)}
                              src={item.checked?"http://wmall.wochu.cn/h5/mall//img/selected.png":"http://wmall.wochu.cn/h5/mall//img/unselect.png"} alt=""/>
                         </div>
-                        <img className="goods_img" src={item.icon} alt=""/>               
+                        <img className="goods_img" src={item.picUrl} alt=""/>               
                         <div className="right">
                             <p className="goodsDec">{item.goodsName}</p>
                             <div className="bottom">
@@ -77,6 +80,11 @@ class OrderList extends Component{
                         }
 
                 </div>
+                <Prompt  flag={bool} info="(⊙﹏⊙)" tip="真的要删除这些商品吗？" sure={this.props.delSure.bind(this)} 
+                cancle={this.props.delCancle.bind(this)}></Prompt>
+                <Prompt  flag={allDelBool} info="(T^T)" tip="主人你真的不要我了吗" sure={this.props.allDelSure.bind(this)} 
+                cancle={this.props.allDelCancle.bind(this)}></Prompt>
+        
             </Fragment>
         )
      }
@@ -101,46 +109,85 @@ const mapStateToProps=(state)=>({
 })
 
 const mapDispatchToProps=(dispatch)=>({
+    //商品是否选中
     checkedChange(index){
         dispatch(checked_change(index))
     },
+    //全选
     allCheckedHandle(){
         dispatch(allChecked_change)
     },
+    //购物车商品加按钮
     goodsNumAdd(index){
         dispatch(goodsNum_Add(index))
     },
+    //购物车商品减按钮
     goodsNumReduce(index){
         dispatch(goodsNum_Reduce(index))
     },
+    //点击编辑按钮
     delBn(){     
         this.setState({
             isDel:true
         })
         dispatch(goodsDel_Tog(this.state.isDel))
     },
+    //点击完成编辑按钮
     completeBn(){
         this.setState({
             isDel:false
         })
         dispatch(goodsDel_Tog(this.state.isDel))
     },
-
+    //点击删除按钮
     delGoodsBn(){
-        console.log(22)
-        dispatch(goodsDel_Bn)
         this.setState({
+            bool:!this.state.bool
+        })
+       
+    },
+    //返回
+    backBn(){
+        this.props.history.push("/find")
+    },
+    //清空购物车按钮
+    cleanGoodsHandle(e){
+        e.stopPropagation()
+        this.setState({
+            allDelBool:!this.state.allDelBool
+        })
+      
+    },
+    //点击删除按钮的两个弹框事件
+    delSure(){
+        dispatch(goodsDel_Bn)
+        dispatch(goodsDel_Tog(this.state.isDel))
+        this.setState({
+            bool:false,
+            isDel:false,
+        })
+    },
+    delCancle(){
+        this.setState({
+            bool:false,
             isDel:false
         })
         dispatch(goodsDel_Tog(this.state.isDel))
     },
-    backBn(){
-        this.props.history.push("/find")
-    },
-    cleanGoodsHandle(e){
-        e.stopPropagation()
+    //点击清空购物车的两个弹框事件
+    allDelSure(){
         dispatch(clean_goods)
-    }
+        this.setState({
+            allDelBool:false,
+            isDel:false,
+        })
+    },
+    allDelCancle(){
+        this.setState({
+            allDelBool:false,
+            isDel:false,
+        })
+    },
 })
 
 

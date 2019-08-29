@@ -3,7 +3,7 @@ import { handleActions } from "redux-actions"
 
 const defaultState ={
     goodList:[],
-    shopGoods:[],
+    shopGoods: JSON.parse(sessionStorage.getItem("shoppingCart")) ||[],
     allChecked:true,
     name:"",
     password:"",
@@ -31,7 +31,7 @@ export default  handleActions({
     REGISTER_ORDER:(state,action)=>{
         let newState= Object.assign({},state)
         let flag=false
-        newState.users.map((item)=>{
+        newState.users.forEach((item)=>{
             if(item.name===newState.name){
                 flag = true
             }
@@ -54,7 +54,7 @@ export default  handleActions({
     //登录验证
     LOGIN_ORDER:(state,action)=>{
         let newState= Object.assign({},state)
-        newState.users.map((item)=>{
+        newState.users.forEach((item)=>{
             if(item.name===newState.name&&item.password === newState.password){
                 newState.isLogin = true
                 newState.user = item.name
@@ -71,15 +71,15 @@ export default  handleActions({
     },
     //点击添加到购物车
     ADDSHOP_ORDER:(state,action)=>{
-        if(!state.isLogin){
-            window.location.href = 'http://localhost:3000/#/login';
-            return state
-        } 
+        // if(!state.isLogin){
+        //     window.location.href = 'http://localhost:3000/#/login';
+        //     return state
+        // } 
         let newState= JSON.parse(JSON.stringify(state))
         action.value.checked = true
         action.value.num = 1
         let flag = true
-        newState.shopGoods.map((item,index) => {
+        newState.shopGoods.forEach((item,index) => {
             if(item.goodsGuid ===action.value.goodsGuid){
                 flag = false
                 newState.shopGoods[index].num++
@@ -89,7 +89,7 @@ export default  handleActions({
             let goods = JSON.parse(JSON.stringify(action.value))
             newState.shopGoods.push(goods)
         }
-        newState.n++
+        sessionStorage.setItem("shoppingCart",JSON.stringify(newState.shopGoods))
         return newState
     },
     //选中图标点击
@@ -114,6 +114,8 @@ export default  handleActions({
     GOODSNUM_ADD:(state,action)=>{
         let newState= JSON.parse(JSON.stringify(state))
         newState.shopGoods[action.value].num++
+        sessionStorage.setItem("shoppingCart",JSON.stringify(newState.shopGoods))
+
         return newState
     },
      //计数器-
@@ -122,6 +124,8 @@ export default  handleActions({
         if(newState.shopGoods[action.value].num>=2){
             newState.shopGoods[action.value].num--
         }
+        sessionStorage.setItem("shoppingCart",JSON.stringify(newState.shopGoods))
+
         return newState
     },
     //点击编辑切换
@@ -139,6 +143,7 @@ export default  handleActions({
         newState.shopGoods =newState.shopGoods.filter((item,index)=>(
             item.checked === false
         ))
+        sessionStorage.setItem("shoppingCart",JSON.stringify(newState.shopGoods))
         return newState
     },
     //清空购物车
@@ -146,6 +151,16 @@ export default  handleActions({
         let newState= JSON.parse(JSON.stringify(state))
         newState.shopGoods.length = 0
         return newState
+    },
+    //退出登录
+    LOGOUT_AC:(state,action)=>{
+        sessionStorage.clear();
+        let newState= JSON.parse(JSON.stringify(state))
+        newState.isLogin=false
+        newState.user="未登录"
+        newState.shopGoods=[]    
+        return newState
+
     }
 
 },defaultState)

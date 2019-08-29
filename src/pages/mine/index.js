@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { MineWrap } from "./styled"
+import { logOutAc} from "@store/orderAction"
+import Prompt from "@common/prompt"
 import {connect } from "react-redux"
  class Mine extends Component {
     state={
-        flag:false
+        flag:false,
+        bool:false
     }
     render() {
-        let { flag } = this.state
+        let { flag,bool} = this.state
         let {user,isLogin} = this.props
-        console.log(isLogin,111)
         return (
             <MineWrap>
                 <div className="top">
@@ -89,9 +91,9 @@ import {connect } from "react-redux"
                             <img src={require("@static/img/15.png")} alt=""/>
                             <p>意见反馈</p>
                         </li>
-                        <li>
+                        <li onClick={this.props.logOut.bind(this)}>
                             <img src={require("@static/img/16.png")} alt=""/>
-                            <p>设置中心</p>
+                            <p>退出登录</p>
                         </li>
                         <li>
                             <img src={require("@static/img/18.png")} alt=""/>
@@ -110,6 +112,8 @@ import {connect } from "react-redux"
                     
                     </div>
                 </div>
+                <Prompt  flag={bool}  tip="您确定要退出登录吗？" sure={this.props.logOutSure.bind(this)} 
+                cancle={this.props.logOutCancle.bind(this)}></Prompt>
 
 
             </MineWrap>
@@ -123,6 +127,7 @@ const mapStateToProps=(state)=>({
     isLogin:state.order.isLogin
 })
 const mapDispatchToProps=(dispatch)=>({
+    //没登录点击我的页面时  跳转登录
     logHandle(){
         this.setState({
             flag:true
@@ -130,7 +135,26 @@ const mapDispatchToProps=(dispatch)=>({
         setTimeout(()=>{
             this.props.history.push("/login")
         },500)
+    },
+
+    //点击退出登录按钮
+    logOut(){
+        this.setState({
+            bool:!this.state.bool
+        })
+    },
+    logOutCancle(){
+        this.setState({
+            bool:!this.state.bool
+        })
+    },
+    logOutSure(){
+        dispatch(logOutAc)
+        this.setState({
+            bool:!this.state.bool
+        })
     }
+    
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Mine)
