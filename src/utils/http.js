@@ -1,5 +1,6 @@
 import {fetch as fetchPro} from "whatwg-fetch";
 import qs from "qs"
+ 
 const get = (url,data)=>{
     let str = "";
     if(data){

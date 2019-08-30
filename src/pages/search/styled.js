@@ -30,7 +30,8 @@ span{
     line-height:.55rem;
     text-align:center;
     padding:0 .1rem;
-    font-size:.27rem
+    font-size:.27rem;
+    padding-right:.4rem
 
 }
 input{
@@ -65,6 +66,13 @@ input{
     display:flex;
     flex-wrap:wrap;
 
+}
+img{
+    padding-top:.16rem;
+    padding-left:.1rem;
+    width:.48rem;
+    height:.48rem;
+   
 }
 ul li{
     height:.6rem;

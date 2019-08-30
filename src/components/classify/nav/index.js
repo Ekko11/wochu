@@ -15,6 +15,7 @@ class Nav extends Component {
     }
     render() {
       let {shoppingList} = this.props
+    
       let {togIndex} = this.state
         return (
             <NavWrapper>
@@ -33,6 +34,7 @@ class Nav extends Component {
         )
     }
     togglePageHandle(displayIndex){
+        sessionStorage.setItem("displayIndex",displayIndex)
         this.setState({
             togIndex:displayIndex
         })
@@ -41,7 +43,10 @@ class Nav extends Component {
     changeColor(){
         this.setState({
             m:2
-        })   
+        })  
+  
+   
+ 
     }
     changeData(){
         this.setState({

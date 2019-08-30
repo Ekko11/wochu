@@ -17,6 +17,13 @@ align-items:center;
     border-right:none;
     border-radius:.14rem 0 0 .14rem;
     line-height:.642rem;
+    text-align:center;
+}
+img{
+    padding-top:.16rem;
+    padding-left:.1rem;
+    width:.48rem;
+    height:.48rem
 }
 input{
     width:6.37rem;

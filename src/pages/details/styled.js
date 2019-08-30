@@ -122,7 +122,7 @@ img{
 .guess ul{
     display:flex;
     flex-direction:row;
-    height:3rem;
+    height:3.4rem;
     width:10rem;
     background:#fff;
     margin-bottom:2rem
@@ -137,7 +137,6 @@ img{
 .guessCon{
     width: 2.2rem;
     height: 2rem;
-    background:green
 }
 .guessCon img{
     width: 2.2rem;
@@ -170,7 +169,14 @@ img{
     font-size:.24rem;
 }
 .guessp i{
-    padding-right:.2rem
+    width:.7rem;
+    height:.5rem;
+    padding-right:.3rem;
+   margin-top:-.25rem
+}
+ i img{
+    width:90%;
+    height:90%
 }
 .addcategory{
     width:100%;

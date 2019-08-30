@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {SearchWrapper} from "./styled"
 import {hot_search} from "@api/sort"
 import {connect} from "react-redux"
+import search from "@static/img/home_search.png"
 import SearchResult from "@components/searchResult"
 import {mapStateToProps,mapDispatchToProps} from "./connect"
  class Search extends Component {
@@ -24,7 +25,7 @@ import {mapStateToProps,mapDispatchToProps} from "./connect"
                     &lt;
                     </div>
                     <div className="ss">
-                    <span>111</span>
+                    <span><img src={search}/></span>
                     <input type="text" value={inputVal} onChange={this.searchHandle.bind(this)} />
                     </div>
                   <div className="btn" onClick={this.props.addHandle.bind(this)}>搜索</div>

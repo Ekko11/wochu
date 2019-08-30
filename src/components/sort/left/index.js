@@ -36,6 +36,7 @@ class Left extends Component {
      this.setState({
         leftList:data.data
      })
+    
     }
     handleparentId(){
      this.setState({

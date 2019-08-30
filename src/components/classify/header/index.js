@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {ClassifyHeaderWrapper} from "./styled"
 import {withRouter} from "react-router-dom"
+import gwc from "@static/img/25.png"
+import search from "@static/img/home_search.png"
  class ClassifyHeader extends Component {
     constructor(){
         super()
@@ -24,10 +26,10 @@ import {withRouter} from "react-router-dom"
                 </div>
                 <div className="header_right">
                 <div className="go-cart">
-                购物车
+                <img src={gwc} onClick={this.toCategory.bind(this)}/>
                 </div>
-                <div className="search-key">
-                搜索
+                <div>
+                <img src={search} onClick={this.toSearch.bind(this)} className="search-key"/>
                 </div>
                 </div>
                 </div>
@@ -37,6 +39,12 @@ import {withRouter} from "react-router-dom"
     }
     handleBack(){
        this.props.history.goBack()
+    }
+    toSearch(){
+        this.props.history.push({pathname:"/search"})
+    }
+    toCategory(){
+        this.props.history.push({pathname:"/order"})
     }
 }
 

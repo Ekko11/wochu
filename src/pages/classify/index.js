@@ -6,6 +6,8 @@ import { ClassifyWrapper } from "./styled"
 import { mapStateToProps, mapDispatchToProps } from "./connect"
 import observer from '../../observer';
 import { withRouter } from "react-router-dom"
+import add from "@static/img/add_cart.png"
+
 class Classify extends Component {
     state = {
         getIndex: 0
@@ -29,16 +31,16 @@ class Classify extends Component {
                                 <ul key={index}>
                                     {
                                         item.displayIndex == getIndex ? item.goods.map((child, idx) => (
-                                            <li className="li-on" key={idx} onClick={this.classifyToDetail.bind(this,child.goodsGuid)}>
+                                            <li className="li-on" key={idx} >
                                                 <div className="fl">
-                                                    <img src={child.picUrl} />
+                                                    <img src={child.picUrl} onClick={this.classifyToDetail.bind(this,child.goodsGuid)}/>
                                                 </div>
                                                 <div className="fr">
                                                     <div className="goods-name">{child.goodsName}</div>
                                                     <div className="goods-intro">{child.description}</div>
                                                     <div className="goods-price">
                                                         <p>￥{child.price}<del>{child.marketPrice}</del></p>
-                                                        <span>111</span>
+                                                        <span><img src={add} onClick={this.props.ClassifytoCategory.bind(this,child)}/></span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -53,6 +55,7 @@ class Classify extends Component {
         )
     }
     classifyToDetail(goodsGuid) {
+        sessionStorage.setItem("goodsGuid",goodsGuid)
         this.props.history.push({ pathname: "/details",query:{goodsGuid:goodsGuid}})
     }
     componentDidMount() {
@@ -60,10 +63,11 @@ class Classify extends Component {
         this.props.handleGetGoodsList(categoryId);
         observer.$on("handletog", (val) => {
             this.setState({
-                getIndex: val
+                getIndex:val
             })
         })
     }
+   
 
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Classify))

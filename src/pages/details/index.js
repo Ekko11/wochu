@@ -3,8 +3,9 @@ import { connect } from "react-redux"
 import { DetailsWrapper } from "./styled"
 import { details_api, get_img, details_relative } from "@api/sort"
 import { Carousel } from 'antd';
+import add from "@static/img/add_cart.png"
 import { mapStateToProps, mapDispatchToProps } from "./connect"
-
+import {withRouter} from "react-router-dom"
 class Details extends Component {
   state = {
     detailsList: {},
@@ -14,7 +15,7 @@ class Details extends Component {
   }
   render() {
     let { detailsList, imgList, relativeList } = this.state
-    console.log(relativeList)
+    console.log(relativeList,11)
     return (
       <DetailsWrapper>
         <div className="container" >
@@ -58,34 +59,37 @@ class Details extends Component {
                 relativeList.map((item, index) => (
                   <li key={index}>
                     <div className="guessCon">
-                      <img src={item.picUrl} />
+                      <img src={item.picUrl} onClick={this.toDetail.bind(this,item.goodsGuid)}/>
                     </div>
                     <p>{item.goodsName}</p>
                     <del>￥{item.marketPrice}</del>
-                    <div className="guessp"><span>￥{item.price}</span><i>2222</i></div>
+                    <div className="guessp"><span>￥{item.price}</span><i><img src={add} onClick={this.props.relativeToCategroy.bind(this,item)}/></i></div>
                   </li>
                 ))
               }
             </ul>
           </div>
-          <div className="addcategory">加入购物车</div>
+          <div className="addcategory" onClick={this.props.handleToGwc.bind(this,detailsList)}>加入购物车</div>
         </div>
       </DetailsWrapper>
     )
   }
   async componentDidMount() {
-    let data = await details_api(this.props.location.query.goodsGuid);
+    let data = await details_api(sessionStorage.getItem("goodsGuid")||this.props.location.query.goodsGuid);
     this.setState({
       detailsList: data.data
     })
-    let data1 = await get_img(this.props.location.query.goodsGuid)
+    let data1 = await get_img(sessionStorage.getItem("goodsGuid")||this.props.location.query.goodsGuid)
     this.setState({
       imgList: data1.data
     })
-    let data2 = await details_relative(this.props.location.query.goodsGuid)
+    let data2 = await details_relative(sessionStorage.getItem("goodsGuid")||this.props.location.query.goodsGuid)
     this.setState({
       relativeList: data2.data.userloving
     })
   }
+  toDetail(goodsGuid){
+  
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Details)
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Details))
