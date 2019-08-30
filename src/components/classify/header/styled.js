@@ -30,6 +30,17 @@ background:#fff;
     display:flex;
     justify-content:space-between
 }
+img{
+    margin-right:.2rem;
+    width:.6rem;
+    height:.6rem
+}
+.search-key{
+    width:.45rem;
+    height:.45rem;
+    margin-top:.07rem
+}
+
 .header_right{
     display:flex;
     flex-direction:row; 

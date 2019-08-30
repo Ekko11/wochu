@@ -36,7 +36,7 @@ class Left extends Component {
      this.setState({
         leftList:data.data
      })
-     console.log(data,1111)
+
     
     }
     handleparentId(){

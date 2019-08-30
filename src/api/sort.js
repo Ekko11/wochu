@@ -7,7 +7,7 @@ export const hot_search=()=>http.get("/client/v1/goods/SearchByTag")
 export const details_api=(goodsGuid)=>http.get("/api/goods/goods/detail",{goodsGuid:goodsGuid})
 export const get_img=(goodsGuid)=>http.get("/client/v1/goods/imgLoopList?parameters=%7B%22goodsGuid%22:%22"+goodsGuid+"%22%7D")
 export const details_relative=(goodsGuid)=>http.get("/client/v1/goods/getGoodsRelevantList?parameters=%7B%22goodsGuid%22:%22"+goodsGuid+"%22%7D")
+export const search_api=(keyword,orderId=0,pageIndex=1,pageSize=20)=>http.get("/api/goods/searchbykeyword",{keyword:keyword,orderId:orderId,pageIndex:pageIndex,pageSize:pageSize})
 
 
-// http://api9.wochu.cn/api/goods/searchbykeyword?orderId=0&pageIndex=1&pageSize=20&keyword=%E8%B1%86%E8%85%90
 // http://api9.wochu.cn/api/goods/searchbykeyword?orderId=0&pageIndex=3&pageSize=20&keyword=%E

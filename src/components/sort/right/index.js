@@ -21,8 +21,6 @@ import {withRouter} from "react-router-dom"
   }
     render() {
         let {rightList,flag,rightGoodsList,togIndex}=this.state
-        console.log(rightList)
-        console.log(rightList,88)
         return (
             <RightWrapper>
             <div className="right">
@@ -95,9 +93,10 @@ import {withRouter} from "react-router-dom"
     
     }
     handleToClassify(categoryId,displayIndex){
-        console.log(categoryId,222)
+      sessionStorage.setItem("sort",JSON.stringify({categoryId:categoryId,displayIndex:displayIndex}));
+      console.log(JSON.parse(sessionStorage.getItem("sort")).categoryId);
+      console.log(JSON.parse(sessionStorage.getItem("sort")).displayIndex);
        this.props.history.push("/classify/"+categoryId+"/"+displayIndex)
-       console.log(displayIndex,2233)
     }
    
 }

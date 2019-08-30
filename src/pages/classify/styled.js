@@ -22,6 +22,9 @@ background:#fff
     height:2.2rem;
    
 }
+span{
+    padding-right:.178rem;
+}
 .fl img{
     width:100%;
     height:100%

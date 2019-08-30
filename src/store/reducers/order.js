@@ -71,10 +71,10 @@ export default  handleActions({
     },
     //点击添加到购物车
     ADDSHOP_ORDER:(state,action)=>{
-        if(!state.isLogin){
-            window.location.href = 'http://localhost:3000/#/login';
-            return state
-        } 
+        // if(!state.isLogin){
+        //     window.location.href = 'http://localhost:3000/#/login';
+        //     return state
+        // } 
         let newState= JSON.parse(JSON.stringify(state))
         action.value.checked = true
         action.value.num = 1
