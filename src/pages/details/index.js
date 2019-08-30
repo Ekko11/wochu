@@ -4,6 +4,8 @@ import { DetailsWrapper } from "./styled"
 import { details_api, get_img, details_relative } from "@api/sort"
 import { Carousel } from 'antd';
 import add from "@static/img/add_cart.png"
+import gwc from "@static/img/ac_cart.png"
+import fh from "@static/img/refer.png"
 import { mapStateToProps, mapDispatchToProps } from "./connect"
 import {withRouter} from "react-router-dom"
 class Details extends Component {
@@ -70,25 +72,49 @@ class Details extends Component {
           </div>
           <div className="addcategory" onClick={this.props.handleToGwc.bind(this,detailsList)}>加入购物车</div>
         </div>
+
+        <div className="shop"><img src={gwc} onClick={this.toCategory.bind(this)}/></div>
+        <div className="fh"><img src={fh} onClick={this.toClassify.bind(this)}/></div>
       </DetailsWrapper>
     )
   }
-  async componentDidMount() {
-    let data = await details_api(sessionStorage.getItem("goodsGuid")||this.props.location.query.goodsGuid);
+
+ async getDetail(id=this.props.match.params.id){
+   console.log(this.props.match.params.id,11)
+   let data = await details_api(id);
+   console.log(this.props.match.params.id,22)
+   let data1 = await get_img(id)  
+   let data2 = await details_relative(id)
     this.setState({
-      detailsList: data.data
-    })
-    let data1 = await get_img(sessionStorage.getItem("goodsGuid")||this.props.location.query.goodsGuid)
-    this.setState({
+      relativeList: data2.data.userloving,
+      detailsList: data.data,
       imgList: data1.data
     })
-    let data2 = await details_relative(sessionStorage.getItem("goodsGuid")||this.props.location.query.goodsGuid)
-    this.setState({
-      relativeList: data2.data.userloving
-    })
+  }
+
+  componentDidMount() {
+    this.getDetail()
+  
   }
   toDetail(goodsGuid){
-  
+    this.props.history.push("/details/"+goodsGuid)
 }
+toClassify(){
+        this.props.history.push("/classify/"+JSON.parse(sessionStorage.getItem("sort")).categoryId+"/"+JSON.parse(sessionStorage.getItem("sort")).displayIndex)
+}
+toCategory(){
+  this.props.history.push("/order")
+}
+
+
+ 
+  componentWillReceiveProps(...rest){
+
+    console.log(this.props.match.params.id,888)
+    let {id} = rest[0].match.params
+   console.log(rest,555)
+    this.getDetail(id)
+  }
+
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Details))

@@ -54,11 +54,11 @@ class Classify extends Component {
         )
     }
     classifyToDetail(goodsGuid) {
-        sessionStorage.setItem("goodsGuid",goodsGuid)
-        this.props.history.push({ pathname: "/details",query:{goodsGuid:goodsGuid}})
+        this.props.history.push("/details/"+goodsGuid)
     }
     componentDidMount() {
         let { categoryId } = this.props;
+        
         this.props.handleGetGoodsList(categoryId);
         observer.$on("handletog", (val) => {
             this.setState({

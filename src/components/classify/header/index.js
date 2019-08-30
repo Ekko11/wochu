@@ -38,7 +38,7 @@ import search from "@static/img/home_search.png"
         )
     }
     handleBack(){
-       this.props.history.goBack()
+       this.props.history.push("/find")
     }
     toSearch(){
         this.props.history.push({pathname:"/search"})

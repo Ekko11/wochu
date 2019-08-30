@@ -13,7 +13,6 @@ export const mapDispatchToProps=(dispatch)=>({
         }
     },
     handleToDetail(goodsGuid){
-        sessionStorage.setItem("goodsGuid",goodsGuid)
-        this.props.history.push({ pathname: "/details",query:{goodsGuid:goodsGuid}})
+        this.props.history.push("/details/"+goodsGuid)
     }
 })
