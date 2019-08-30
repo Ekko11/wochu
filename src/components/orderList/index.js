@@ -44,7 +44,7 @@ class OrderList extends Component{
                             <img className="check_img" onClick={this.props.checkedChange.bind(this,index)}
                              src={item.checked?"http://wmall.wochu.cn/h5/mall//img/selected.png":"http://wmall.wochu.cn/h5/mall//img/unselect.png"} alt=""/>
                         </div>
-                        <img className="goods_img" src={item.icon} alt=""/>               
+                        <img className="goods_img" src={item.picUrl} alt=""/>               
                         <div className="right">
                             <p className="goodsDec">{item.goodsName}</p>
                             <div className="bottom">

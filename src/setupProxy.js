@@ -11,4 +11,11 @@ module.exports = (app) => {
             target: "http://api9.wochu.cn",
             changeOrigin: true
         }))
+    // app.use(proxy("/v2",
+    //     {
+    //         target: "http://api.growingio.com",
+    //         changeOrigin: true
+    //     }))
 }
+
+// https://api.growingio.com/v2

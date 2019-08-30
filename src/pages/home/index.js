@@ -10,6 +10,7 @@ import RowCarousel from "./rowcarousel";
 import { home_api } from "@api/home";
 import { home_async_lists } from "../../actions/home/actionCreators";
 import store from "@store/index";
+import {addShop_order} from "@store/orderAction"
 import "./style.css";
 import { connect } from "react-redux";
 class Home extends Component {
@@ -29,17 +30,17 @@ class Home extends Component {
                         <div className="allDiv">
                             <Home_top>
                                 <img src={home_logo} alt="" />
-                                <div>
+                                <div onClick={this.props.handleAddress.bind(this)}>
                                     <span>请填写地址</span>
                                     <img src={home_icon} alt="" />
                                 </div>
-                                <img src={home_search} alt="" />
+                                <img src={home_search} alt="" onClick={this.props.handleSearch.bind(this)} />
                             </Home_top>
                             <Carousels />
                             <Home_every_ul>
                                 {
                                     imgUrl.map((item, index) => (
-                                        <li key={index}>
+                                        <li key={index} onClick={this.props.handleEveryday.bind(this, index + 1)}>
                                             <img src={item} alt="" />
                                         </li>
                                     ))
@@ -63,7 +64,7 @@ class Home extends Component {
                                         <div>{allData[2].items[0].description}</div>
                                         <div>
                                             <span>￥{allData[2].items[0].marketPrice}</span>
-                                            <img src={add_cart} alt="" />
+                                            <img src={add_cart} alt=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -71,13 +72,13 @@ class Home extends Component {
                                     <div className="oneCol">
                                         {
                                             allData[3].items.map((item, index) => (
-                                                <div key={index}>
+                                                <div key={index} onClick={this.props.handleDetail.bind(this, item.source)}>
                                                     <img src={item.imgUrl} alt="" />
                                                     <div>{item.goodsName}</div>
                                                     <div>{item.marketPrice == item.price ? "" : "￥" + item.marketPrice}</div>
                                                     <div>
                                                         <span>￥{item.price}</span>
-                                                        <img src={add_cart} alt="" />
+                                                        <img src={add_cart} alt=""  onClick={this.props.handleAdd.bind(this,item)}/>
                                                     </div>
                                                 </div>
                                             ))
@@ -106,7 +107,7 @@ class Home extends Component {
                                         <div>{allData[7].items[0].description}</div>
                                         <div>
                                             <span>￥{allData[7].items[0].marketPrice}</span>
-                                            <img src={add_cart} alt="" />
+                                            <img src={add_cart} alt=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -114,13 +115,13 @@ class Home extends Component {
                                     <div className="oneCol">
                                         {
                                             allData[8].items.map((item, index) => (
-                                                <div key={index}>
+                                                <div key={index} onClick={this.props.handleDetail.bind(this, item.source)}>
                                                     <img src={item.imgUrl} alt="" />
                                                     <div>{item.goodsName}</div>
                                                     <div>{item.marketPrice == item.price ? "" : "￥" + item.marketPrice}</div>
                                                     <div>
                                                         <span>￥{item.price}</span>
-                                                        <img src={add_cart} alt="" />
+                                                        <img src={add_cart} alt=""  onClick={this.props.handleAdd.bind(this,item)}/>
                                                     </div>
                                                 </div>
                                             ))
@@ -138,13 +139,13 @@ class Home extends Component {
                                                     {
                                                         item.map((child, ids) => (
 
-                                                            <div key={ids}>
+                                                            <div key={ids} onClick={this.props.handleDetail.bind(this, child.source)}>
                                                                 <img src={child.imgUrl} alt="" />
                                                                 <div>{child.goodsName}</div>
                                                                 <div>{child.marketPrice == child.price ? "" : "￥" + child.marketPrice}</div>
                                                                 <div>
                                                                     <span>￥{child.price}</span>
-                                                                    <img src={add_cart} alt="" />
+                                                                    <img src={add_cart} alt=""  onClick={this.props.handleAdd.bind(this,child)}/>
                                                                 </div>
                                                                 <div id={child.stock ? "none" : "show"}>已抢完</div>
                                                             </div>
@@ -183,11 +184,34 @@ class Home extends Component {
 const mapStateToProps = (state) => ({
     allData: state.home.allData,
     imgBigUrl: state.home.imgBigUrl,
-    imgSixUrl: state.home.imgSixUrl
+    imgSixUrl: state.home.imgSixUrl,
+    isLogin:state.order.isLogin
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    handleEveryday(val) {
+        this.props.history.push({ pathname: "/garden", value: { pos: val } });
+    },
+    handleDetail(goodsGuid) {
+        this.props.history.push("/details/"+goodsGuid);
+    },
+    handleSearch() {
+        this.props.history.push("/search");
+    },
+    handleAddress() {
+        this.props.history.push("/address");
+    },
+    handleAdd(num,e){
+        num.goodsGuid = num.source
+        num.picUrl = num.imgUrl
+        e.stopPropagation();
+        if(this.props.isLogin){
+            dispatch(addShop_order(num))
+        }else{
+            this.props.history.push("/login")
+        }
 
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -11,6 +11,7 @@ export default (state = defaultState, action) => {
     switch (action.type) {
         case home_list:
             let newState = JSON.parse(JSON.stringify(state));
+            console.log(newState);
             newState.allData = JSON.parse(JSON.stringify(action.value.data.acts));
             newState.allData.map((item, index) => {
                 if (item.items.length === 1 && index > 8) {
@@ -23,8 +24,6 @@ export default (state = defaultState, action) => {
         case garden:
             let gardenNewState = JSON.parse(JSON.stringify(state));
             gardenNewState.gardenData=action.value.data.areaList;
-            // console.log(action.value.data.areaList);
-            console.log(gardenNewState.gardenData);
             return gardenNewState;
         default:
             return state;

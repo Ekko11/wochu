@@ -14,7 +14,6 @@ class Details extends Component {
   }
   render() {
     let { detailsList, imgList, relativeList } = this.state
-    console.log(relativeList)
     return (
       <DetailsWrapper>
         <div className="container" >
@@ -74,15 +73,15 @@ class Details extends Component {
     )
   }
   async componentDidMount() {
-    let data = await details_api(this.props.location.query.goodsGuid);
+    let data = await details_api(this.props.match.params.id);
     this.setState({
       detailsList: data.data
     })
-    let data1 = await get_img(this.props.location.query.goodsGuid)
+    let data1 = await get_img(this.props.match.params.id)
     this.setState({
       imgList: data1.data
     })
-    let data2 = await details_relative(this.props.location.query.goodsGuid)
+    let data2 = await details_relative(this.props.match.params.id)
     this.setState({
       relativeList: data2.data.userloving
     })

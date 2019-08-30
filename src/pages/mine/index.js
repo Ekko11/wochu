@@ -8,7 +8,6 @@ import {connect } from "react-redux"
     render() {
         let { flag } = this.state
         let {user,isLogin} = this.props
-        console.log(isLogin,111)
         return (
             <MineWrap>
                 <div className="top">
