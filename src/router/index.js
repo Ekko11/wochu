@@ -83,7 +83,7 @@ export const noTabBarRoute = [
         icon:"\ue61c"
     },
     {
-        path:"/details",
+        path:"/details/:id",
         component:Details,
         meta:{
             flag:false,

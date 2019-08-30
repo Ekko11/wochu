@@ -190,5 +190,19 @@ img{
     color:#fff;
     font-size:.34rem
 }
+.shop{
+    width:.8rem;
+    height:.8rem;
+    position:absolute;
+    top:.5rem;
+    right:.8rem
+}
+.fh{
+    width:.5rem;
+    height:.5rem;
+    position:absolute;
+    top:.5rem;
+    left:.5rem
+}
 
 `
