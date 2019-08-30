@@ -37,6 +37,18 @@ const Garden=Loadable({
     loader:()=>import("./garden"),
     loading:Loading
 })
+const Address=Loadable({
+    loader:()=>import("./address"),
+    loading:Loading
+})
+const Addresslist=Loadable({
+    loader:()=>import("./addresslist"),
+    loading:Loading
+})
+const AddHome=Loadable({
+    loader:()=>import("./addhome"),
+    loading:Loading
+})
 
 export{
     Home,
@@ -47,5 +59,8 @@ export{
     Classify,
     Search,
     Details,
-    Garden
+    Garden,
+    Address,
+    Addresslist,
+    AddHome
 }

@@ -15,7 +15,6 @@ class Details extends Component {
   }
   render() {
     let { detailsList, imgList, relativeList } = this.state
-    console.log(relativeList,11)
     return (
       <DetailsWrapper>
         <div className="container" >

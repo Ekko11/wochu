@@ -18,7 +18,6 @@ class Classify extends Component {
     }
     render() {
         let { shoppingList } = this.props
-        console.log(shoppingList)
         let { getIndex } = this.state
         return (
             <Fragment>

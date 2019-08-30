@@ -1,4 +1,4 @@
-import { Home,Find,Order,Mine,Login,Classify,Search,Details,Garden} from "@pages"
+import { Home,Find,Order,Mine,Login,Classify,Search,Details,Garden,Address,Addresslist,AddHome} from "@pages"
 
 export const tabBarRoute =[
     {
@@ -83,7 +83,7 @@ export const noTabBarRoute = [
         icon:"\ue61c"
     },
     {
-        path:"/details",
+        path:"/details/:id",
         component:Details,
         meta:{
             flag:false,
@@ -99,8 +99,31 @@ export const noTabBarRoute = [
             flag:false
         },
         name:"我的菜园",
-
-    }
+    },
+    {
+        path:"/address",
+        component:Address,
+        meta:{
+            flag:false
+        },
+        name:"地址",
+    },
+    {
+        path:"/addresslist",
+        component:Addresslist,
+        meta:{
+            flag:false
+        },
+        name:"地址搜索",
+    },
+    {
+        path:"/addhome",
+        component:AddHome,
+        meta:{
+            flag:false
+        },
+        name:"地址添加",
+    },
 ]
 
 export const routeConfig = tabBarRoute.concat(noTabBarRoute)

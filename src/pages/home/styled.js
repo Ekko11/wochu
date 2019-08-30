@@ -7,7 +7,7 @@ export const Home_top = styled.div`
     z-index:10;
     display:flex;
     align-items:center;
-    width:7.5rem;
+    width:100%;
     height:.9rem;
     padding:0 .24rem;
     background: #fff;
